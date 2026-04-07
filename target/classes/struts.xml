@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+ "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+
+    <package name="appDefault" namespace="/" extends="struts-default,json-default">
+
+        <action name="loadCategories" class="com.action.CategorieAction" method="display">
+            <result name="input">/categories.jsp</result>
+            <result name="success">/categories.jsp</result>
+        </action>
+
+        <action name="fetchItems" class="com.action.CategorieAction" method="execute">
+            <result name="success" type="json">
+                <param name="root">itemList</param>
+            </result>
+        </action>
+        <action name="saveSelection" class="com.action.CategorieAction" method="save">
+        <result name="success" type="json">
+            <param name="includeProperties">message</param>
+        </result>
+    </action>
+
+        <action name="country" class="com.action.CountryAction">
+            <result>/country.jsp</result>
+        </action>
+
+        <action name="getStates" class="com.action.CountryAction" method="getStates">
+            <result name="success" type="json">
+                <param name="root">stateList</param>
+            </result>
+        </action>
+
+        <action name="loadPage" class="com.action.CountriesAction" method="execute">
+            <result name="success">/countries.jsp</result>
+        </action>
+
+        <action name="requestEntry" class="com.action.RequestAction">
+            <result name="success">/Request.jsp</result>
+        </action>
+
+        <action name="saveRequest" class="com.action.RequestAction" method="save">
+            <result name="input">/Request.jsp</result>
+            <result name="success">/Request.jsp</result>
+        </action>
+
+        <action name="requestEntries" class="com.action.RequestActions">
+            <result name="success">/type.jsp</result>
+        </action>
+
+        <action name="tablePage" class="com.action.DropDownAction">
+            <result>/table.jsp</result>
+        </action>
+
+        <action name="fetchTable" class="com.action.DropDownAction" method="fetchTable">
+            <result type="json">
+                <param name="root">tableList</param>
+            </result>
+        </action>
+
+        <action name="deleteRow" class="com.action.DropDownAction" method="deleteRow">
+            <result type="json" />
+        </action>
+
+    </package>
+</struts>
