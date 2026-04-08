@@ -1,0 +1,62 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 08-Apr-2026, 8:54:50 pm
+    Author     : mounika
+*/
+
+/* style.css */
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.todo-container {
+    max-width: 550px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+}
+
+h3 {
+    color: #333;
+    font-weight: 700;
+}
+
+/* Styling the Input Box */
+.form-control {
+    border-radius: 8px 0 0 8px;
+    border: 2px solid #e0e0e0;
+    padding: 12px;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: none;
+}
+
+/* Styling the Add Button */
+#addButton {
+    border-radius: 0 8px 8px 0;
+    padding: 0 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Styling the List Items */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 15px 10px;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}

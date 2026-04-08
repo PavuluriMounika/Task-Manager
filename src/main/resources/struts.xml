@@ -66,4 +66,15 @@
         </action>
         
     </package>
+    <package name="default" extends="struts-default" namespace="/">
+
+    <action name="">
+        <result>/TaskManger.jsp</result>
+    </action>
+
+    <action name="taskManager">
+        <result>/TaskManger.jsp</result>
+    </action>
+
+</package>
 </struts>

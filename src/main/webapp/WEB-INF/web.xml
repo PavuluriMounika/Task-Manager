@@ -7,7 +7,7 @@
 
     <!-- Welcome file -->
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>TaskManger.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- Struts2 Filter -->
