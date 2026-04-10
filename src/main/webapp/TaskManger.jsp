@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/taskManger.js"></script>
 </head>
 <body>
 <div class="container">
@@ -23,13 +24,13 @@
         
         <div class="input-group mb-4">
             <input type="text" id="taskInput" class="form-control" placeholder="Enter a new task...">
-            <button class="btn btn-primary" type="button" id="addButton">Add Task</button>
+            <button class="btn btn-primary" type="button" id="addToListBtn">Add Task</button>
         </div>
 
-        <ul id="taskList" class="list-group">
+        <ul id="taskDisplayList" class="list-group">
             </ul>
         
-        <button class="btn btn-success w-100 mt-4 shadow-sm" id="saveAll">
+        <button class="btn btn-success w-100 mt-4 shadow-sm" id="saveAllBtn" >
             Save Today's Work
         </button>
     </div>
