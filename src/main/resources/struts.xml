@@ -18,11 +18,12 @@
                 <param name="root">itemList</param>
             </result>
         </action>
+
         <action name="saveSelection" class="com.action.CategorieAction" method="save">
-        <result name="success" type="json">
-            <param name="includeProperties">message</param>
-        </result>
-    </action>
+            <result name="success" type="json">
+                <param name="includeProperties">message</param>
+            </result>
+        </action>
 
         <action name="country" class="com.action.CountryAction">
             <result>/country.jsp</result>
@@ -64,17 +65,19 @@
         <action name="deleteRow" class="com.action.DropDownAction" method="deleteRow">
             <result type="json" />
         </action>
+
+        <action name="taskManager">
+            <result>/TaskManger.jsp</result>
+        </action>
+
+        <action name="saveTasksAction" class="com.action.SaveTaskAction">
+            <result name="success" type="json"></result>
+            <result name="error">/TaskManger.jsp</result>
+        </action>
+
+        <action name="">
+            <result>/TaskManger.jsp</result>
+        </action>
         
     </package>
-    <package name="default" extends="struts-default" namespace="/">
-
-    <action name="">
-        <result>/TaskManger.jsp</result>
-    </action>
-
-    <action name="taskManager">
-        <result>/TaskManger.jsp</result>
-    </action>
-
-</package>
 </struts>

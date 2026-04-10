@@ -18,10 +18,27 @@ $(document).ready(function(){
             
             $("#taskInput").val(""); 
             $("#saveAllBtn").show(); 
-        }
-        
+        }        
         
     });
     
-    
+    $("#saveAllBtn").click(function(){
+        
+        if(temTasks.length==0){
+            alert("Please add at least one");
+            return; 
+        }
+        $.ajax({
+            url :"saveTasksAction",
+            type :"POST",
+            data:{"taskNames": temTasks},
+            traditional : true ,
+            success: function(responce){
+                alert("Tasks saved to database successfully!");
+             
+            }
+            
+        });
+        
+    });
 });
