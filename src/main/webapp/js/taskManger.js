@@ -18,6 +18,7 @@ $(document).ready(function() {
                 <input type="checkbox" class="task-check form-check-input" ${isChecked}>
                 <span class="task-label ${strikeClass}">${name}</span>
                <span class="status-msg" style="display: ${displayMsg}">Completed!</span>
+               <button class="delete-btn">&times;</button>
             </li>`;
         $("#taskDisplayList").append(listItem);
     }
