@@ -18,6 +18,7 @@ public class SaveTaskAction extends ActionSupport {
     // Changed from List<String> to List<Task> to handle objects
     private List<Task> taskNames; 
     private TaskService taskService = new TaskService();
+    private List<Task> savedTasks;
     
     @Override
     public String execute() {
@@ -29,6 +30,12 @@ public class SaveTaskAction extends ActionSupport {
         
         return ERROR;
     }
+    
+    public String fetch(){
+        taskNames =taskService.fetchAllTasks();
+        return "success";
+    }
+    
 
     // Getters and Setters must match the new List<Task> type
     public List<Task> getTaskNames() {

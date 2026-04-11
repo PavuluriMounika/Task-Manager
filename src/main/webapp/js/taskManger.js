@@ -7,57 +7,82 @@
 $(document).ready(function() {
     let temTasks = [];
 
-    // 1. Add Task to List
+    // --- FUNCTION TO RENDER UI ---
+    function renderTask(name, status) {
+        let isChecked = status === "Completed" ? "checked" : "";
+        let strikeClass = status === "Completed" ? "completed-text" : "";
+        let displayMsg = status === "Completed" ? "display:inline" : "display:none";
+
+        let listItem = `
+            <li class="task-item">
+                <input type="checkbox" class="task-check form-check-input" ${isChecked}>
+                <span class="task-label ${strikeClass}">${name}</span>
+               <span class="status-msg" style="display: ${displayMsg}">Completed!</span>
+            </li>`;
+        $("#taskDisplayList").append(listItem);
+    }
+
+    // --- FETCH DATA ON REFRESH ---
+    function loadFromDB() {
+        $.ajax({
+            url: "fetchTasksAction", 
+            type: "GET",
+            success: function(response) {
+                if(response.taskNames) {
+                    $("#taskDisplayList").empty();
+                    temTasks = response.taskNames; 
+                    temTasks.forEach(t => renderTask(t.taskName, t.status));
+                    if(temTasks.length > 0) $("#saveAllBtn").show();
+                }
+            }
+        });
+    }
+
+    loadFromDB(); 
+
+    // --- ADD TASK ---
     $("#addToListBtn").click(function() {
         let taskName = $("#taskInput").val().trim();
-
         if (taskName !== "") {
-// Ensure the key is 'taskName' to match private String taskName in Java
-            temTasks.push({ taskName: taskName, status: "Pending" });
-            let listItem = `
-                <li class="list-group-item d-flex align-items-center">
-                    <input type="checkbox" class="task-check form-check-input me-3">
-                    <span class="task-label">${taskName}</span>
-                </li>`;
-
-            $("#taskDisplayList").append(listItem);
+            let newTask = { taskName: taskName, status: "Pending" };
+            temTasks.push(newTask);
+            renderTask(newTask.taskName, newTask.status);
             $("#taskInput").val("");
             $("#saveAllBtn").show();
         }
     });
 
+    // --- CHECKBOX CHANGE ---
     $(document).on('change', '.task-check', function() {
         let taskSpan = $(this).siblings('.task-label');
-        let taskName = taskSpan.text();
+        let msgSpan = $(this).siblings('.status-msg');
+        let taskNameText = taskSpan.text().trim();
+        let taskObj = temTasks.find(t => t.taskName === taskNameText);
 
-// match 'taskName' here too
-        let taskObj = temTasks.find(t => t.taskName === taskName);
         if ($(this).is(':checked')) {
             taskSpan.addClass('completed-text');
+            msgSpan.fadeIn(200);
             if (taskObj) taskObj.status = "Completed";
         } else {
             taskSpan.removeClass('completed-text');
+            msgSpan.fadeOut(200);
             if (taskObj) taskObj.status = "Pending";
         }
     });
 
-    // 3. Save to Database
+    // --- SAVE TO DB ---
     $("#saveAllBtn").click(function() {
-    if (temTasks.length === 0) return;
-
-    let formData = {};
+        let formData = {};
         temTasks.forEach((task, index) => {
             formData[`taskNames[${index}].taskName`] = task.taskName; 
             formData[`taskNames[${index}].status`] = task.status;
         });
 
-    $.ajax({
-        url: "saveTasksAction",
-        type: "POST",
-        data: formData, // Send as a regular object, NOT stringify
-        success: function(response) {
-            alert("Tasks saved to database successfully!");
-        }
+        $.ajax({
+            url: "saveTasksAction",
+            type: "POST",
+            data: formData,
+            success: function() { alert("All progress saved!"); }
+        });
     });
-});
 });

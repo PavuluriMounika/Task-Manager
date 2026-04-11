@@ -78,6 +78,8 @@
         <action name="">
             <result>/TaskManger.jsp</result>
         </action>
-        
+        <action name="fetchTasksAction" class="com.action.SaveTaskAction" method="fetch">
+            <result name="success" type="json"></result>
+        </action>
     </package>
 </struts>

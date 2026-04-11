@@ -12,6 +12,7 @@ import java.sql.*;
  */
 
 import com.model.Task;
+import java.util.*;
 
 public class TaskDAO {
     
@@ -23,5 +24,23 @@ public class TaskDAO {
             ps.setString(2, task.getStatus());  
             ps.executeUpdate();
         }
+    }
+    public List<Task> getAllTasks(Connection conn) throws Exception{
+        List<Task> tasks = new ArrayList<>();
+        String sql = "SELECT task_name, status FROM tasks";
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while(rs.next()){
+                Task task = new Task();
+                task.setTaskName(rs.getString("task_name"));
+                task.setStatus(rs.getString("status"));
+                tasks.add(task);
+            }
+             
+         }
+             
+        return tasks;
+         
+        
     }
 }

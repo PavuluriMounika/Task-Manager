@@ -8,7 +8,7 @@ import com.dao.TaskDAO;
 import com.model.Task; // Import the Task model
 import com.util.DBUtil;
 import java.sql.Connection;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -39,5 +39,18 @@ public class TaskService {
         } finally {
             try { if (conn != null) conn.close(); } catch (Exception ex) {}
         }
+    }
+    public List<Task> fetchAllTasks(){
+        Connection conn=null;
+        try{
+            conn=DBUtil.getConnection();
+            return taskDAO.getAllTasks(conn);
+        }catch (Exception e) {
+        e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            try { if (conn != null) conn.close(); } catch (Exception ex) {}
+        }
+
     }
 }
