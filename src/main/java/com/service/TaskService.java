@@ -5,6 +5,7 @@
 package com.service;
 
 import com.dao.TaskDAO;
+import com.model.Task; // Import the Task model
 import com.util.DBUtil;
 import java.sql.Connection;
 import java.util.List;
@@ -15,16 +16,18 @@ import java.util.List;
  */
 public class TaskService {
     
-    private TaskDAO taskDAO =new TaskDAO();
+    private TaskDAO taskDAO = new TaskDAO();
     
-    public boolean saveAlltasks(List<String> names){
+    // Changed parameter to List<Task>
+    public boolean saveAlltasks(List<Task> tasks) {
         Connection conn = null;
         try {
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
             
-            for(String name: names){
-                taskDAO.insertTask(name, conn);
+            for(Task task : tasks) {
+                // Pass the whole task object to the DAO
+                taskDAO.insertTask(task, conn);
             }
             conn.commit();
             return true;
@@ -33,7 +36,8 @@ public class TaskService {
             try { if (conn != null) conn.rollback(); } catch (Exception ex) {}
             e.printStackTrace();
             return false;
-        } 
-    
+        } finally {
+            try { if (conn != null) conn.close(); } catch (Exception ex) {}
+        }
     }
 }

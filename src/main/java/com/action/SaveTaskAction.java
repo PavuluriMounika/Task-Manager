@@ -4,6 +4,7 @@
  */
 package com.action;
 
+import com.model.Task; // Make sure you import your Task model
 import com.opensymphony.xwork2.ActionSupport;
 import com.service.TaskService;
 import java.util.*;
@@ -14,26 +15,27 @@ import java.util.*;
  */
 public class SaveTaskAction extends ActionSupport {
     
-    private List<String> taskNames;
-    private TaskService taskService=new TaskService();
+    // Changed from List<String> to List<Task> to handle objects
+    private List<Task> taskNames; 
+    private TaskService taskService = new TaskService();
     
     @Override
-    public String execute(){
+    public String execute() {
         if (taskNames != null && !taskNames.isEmpty()) {
-            boolean success=taskService.saveAlltasks(taskNames);
+            // Update service call to pass the list of Task objects
+            boolean success = taskService.saveAlltasks(taskNames);
             return success ? SUCCESS : ERROR;
         }
         
-        return "error";
+        return ERROR;
     }
 
-    public List<String> getTaskNames() {
+    // Getters and Setters must match the new List<Task> type
+    public List<Task> getTaskNames() {
         return taskNames;
     }
 
-    public void setTaskNames(List<String> taskNames) {
+    public void setTaskNames(List<Task> taskNames) {
         this.taskNames = taskNames;
     }
-    
-    
 }

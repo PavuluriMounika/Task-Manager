@@ -60,3 +60,12 @@ h3 {
 .list-group-item:last-child {
     border-bottom: none;
 }
+.task-label {
+    transition: all 0.3s ease;
+}
+
+.completed-text {
+    text-decoration: line-through;
+    color: #6c757d;
+    opacity: 0.6;
+}

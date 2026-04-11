@@ -10,17 +10,18 @@ import java.sql.*;
  *
  * @author mounika
  */
+
+import com.model.Task;
+
 public class TaskDAO {
     
-    public void insertTask(String taskName,Connection conn) throws Exception {
-        String sql="insert into tasks(task_name,status) Values(?,?)";
+    public void insertTask(Task task, Connection conn) throws Exception {
+        String sql = "INSERT INTO tasks (task_name, status) VALUES (?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            
-            ps.setString(1, taskName);
-            ps.setString(2, "pending");
-            ps.execute();
+            // Updated to getTaskName() to match your Task.java model
+            ps.setString(1, task.getTaskName());   
+            ps.setString(2, task.getStatus());  
+            ps.executeUpdate();
         }
-        
     }
-    
 }
