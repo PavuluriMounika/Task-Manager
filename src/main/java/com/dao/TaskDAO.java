@@ -17,9 +17,10 @@ import java.util.*;
 public class TaskDAO {
     
     public void insertTask(Task task, Connection conn) throws Exception {
-        String sql = "INSERT INTO tasks (task_name, status) VALUES (?, ?)";
+        String sql = "INSERT INTO tasks (task_name, status) VALUES (?, ?) " +
+                     "ON DUPLICATE KEY UPDATE status = VALUES(status)";
+
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            // Updated to getTaskName() to match your Task.java model
             ps.setString(1, task.getTaskName());   
             ps.setString(2, task.getStatus());  
             ps.executeUpdate();

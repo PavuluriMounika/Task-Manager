@@ -18,7 +18,7 @@ $(document).ready(function() {
                 <input type="checkbox" class="task-check form-check-input" ${isChecked}>
                 <span class="task-label ${strikeClass}">${name}</span>
                <span class="status-msg" style="display: ${displayMsg}">Completed!</span>
-               <button class="delete-btn">&times;</button>
+                <button class="delete-btn">&times;</button>
             </li>`;
         $("#taskDisplayList").append(listItem);
     }
@@ -43,15 +43,15 @@ $(document).ready(function() {
 
     // --- ADD TASK ---
     $("#addToListBtn").click(function() {
-        let taskName = $("#taskInput").val().trim();
-        if (taskName !== "") {
-            let newTask = { taskName: taskName, status: "Pending" };
-            temTasks.push(newTask);
-            renderTask(newTask.taskName, newTask.status);
-            $("#taskInput").val("");
-            $("#saveAllBtn").show();
-        }
-    });
+    let taskName = $("#taskInput").val().trim();
+    if (taskName !== "") {
+        let newTask = { taskName: taskName, status: "Pending" }; 
+        temTasks.push(newTask);
+        renderTask(newTask.taskName, newTask.status);
+        $("#taskInput").val("");
+        $("#saveAllBtn").show();
+    }
+});
 
     // --- CHECKBOX CHANGE ---
     $(document).on('change', '.task-check', function() {
