@@ -19,6 +19,7 @@ public class SaveTaskAction extends ActionSupport {
     private List<Task> taskNames; 
     private TaskService taskService = new TaskService();
     private List<Task> savedTasks;
+    private String taskToDelete;
     
     @Override
     public String execute() {
@@ -35,6 +36,10 @@ public class SaveTaskAction extends ActionSupport {
         taskNames =taskService.fetchAllTasks();
         return "success";
     }
+    public String delete(){
+        taskService.removeSingleTask(taskToDelete);
+        return "success";
+    }
     
 
     // Getters and Setters must match the new List<Task> type
@@ -45,4 +50,21 @@ public class SaveTaskAction extends ActionSupport {
     public void setTaskNames(List<Task> taskNames) {
         this.taskNames = taskNames;
     }
+
+    public String getTaskToDelete() {
+        return taskToDelete;
+    }
+
+    public void setTaskToDelete(String taskToDelete) {
+        this.taskToDelete = taskToDelete;
+    }
+
+    public List<Task> getSavedTasks() {
+        return savedTasks;
+    }
+
+    public void setSavedTasks(List<Task> savedTasks) {
+        this.savedTasks = savedTasks;
+    }
+    
 }

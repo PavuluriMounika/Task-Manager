@@ -81,5 +81,8 @@
         <action name="fetchTasksAction" class="com.action.SaveTaskAction" method="fetch">
             <result name="success" type="json"></result>
         </action>
+        <action name="deleteTaskAction" class="com.action.SaveTaskAction" method="delete">
+            <result name="success" type="json"></result>
+        </action>
     </package>
 </struts>

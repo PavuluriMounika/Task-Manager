@@ -53,4 +53,18 @@ public class TaskService {
         }
 
     }
+    public boolean removeSingleTask(String name){
+        Connection conn=null;
+        try{
+            conn=DBUtil.getConnection();
+            taskDAO.deleteTaskByName(name, conn);
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }finally {
+            try { if (conn != null) conn.close(); } catch (Exception ex) {}
+        }
+        
+    }
 }

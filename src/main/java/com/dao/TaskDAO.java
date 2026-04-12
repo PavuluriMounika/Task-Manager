@@ -43,4 +43,14 @@ public class TaskDAO {
          
         
     }
+    
+   public void deleteTaskByName(String name ,Connection conn) throws SQLException{
+       String sql = "DELETE FROM tasks WHERE task_name = ?";
+       try (PreparedStatement ps = conn.prepareStatement(sql)) {
+           ps.setString(1, name);
+           ps.executeUpdate();
+           
+       }
+       
+   }
 }

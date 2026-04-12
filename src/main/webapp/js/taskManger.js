@@ -86,4 +86,25 @@ $(document).ready(function() {
             success: function() { alert("All progress saved!"); }
         });
     });
+    
+    $(document).on('click' ,'.delete-btn',function(){
+        let listItem=$(this).closest('.task-item');
+        let nameToDelete=listItem.find('.task-label').text().trim();
+        
+        listItem.fadeOut(300,function(){
+            $(this).remove();
+        });
+        temTasks=temTasks.filter(t =>t.taskName !==nameToDelete);
+        
+        $.ajax({
+            url : "deleteTaskAction",
+            type : "POST",
+            data :{ "taskToDelete" : nameToDelete },
+            success : function(response){
+                alert("removed from Database successfully.");
+            }
+            
+        });
+        
+    });
 });
