@@ -19,31 +19,18 @@ public class Task {
     private String taskName;
 
     private String status;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTaskName() {
-        return taskName;
-    }
-
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
     
-    
-    
+    @Column(name = "task_date")
+    private String taskDate;
+
+    public Task() {}
+
+    public String getTaskName() { return taskName; }
+    public void setTaskName(String taskName) { this.taskName = taskName; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getTaskDate() { return taskDate; }
+    public void setTaskDate(String taskDate) { this.taskDate = taskDate; }
 }
