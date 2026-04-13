@@ -17,12 +17,13 @@ import java.util.*;
 public class TaskDAO {
     
     public void insertTask(Task task, Connection conn) throws Exception {
-        String sql = "INSERT INTO tasks (task_name, status) VALUES (?, ?) " +
-                     "ON DUPLICATE KEY UPDATE status = VALUES(status)";
+        String sql = "INSERT INTO tasks (task_name, status, task_date) VALUES (?, ?, ?) " +
+                     "ON DUPLICATE KEY UPDATE status = VALUES(status), task_date = VALUES(task_date)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, task.getTaskName());   
             ps.setString(2, task.getStatus());  
+            ps.setString(3, task.getTaskDate()); 
             ps.executeUpdate();
         }
     }
