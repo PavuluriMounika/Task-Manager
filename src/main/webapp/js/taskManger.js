@@ -74,16 +74,30 @@ $(document).ready(function() {
     // --- SAVE TO DB ---
     $("#saveAllBtn").click(function() {
         let formData = {};
+        let sDate = $("#taskDateFilter").val();
+        formData["selectedDate"] = sDate; 
+
+        if (temTasks.length === 0) {
+            alert("No tasks to save!");
+            return;
+        }
         temTasks.forEach((task, index) => {
             formData[`taskNames[${index}].taskName`] = task.taskName; 
             formData[`taskNames[${index}].status`] = task.status;
+            formData[`taskNames[${index}].taskDate`] = sDate;
         });
-
+        console.log("Sending data to server...", formData);
         $.ajax({
             url: "saveTasksAction",
             type: "POST",
             data: formData,
-            success: function() { alert("All progress saved!"); }
+            success: function() { 
+            alert("Daily tasks saved successfully for " + sDate); 
+                loadByDate(); 
+            },
+            error: function() {
+                alert("Error: Could not connect to the server.");
+        }
         });
     });
     
