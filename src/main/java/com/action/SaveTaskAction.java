@@ -20,11 +20,17 @@ public class SaveTaskAction extends ActionSupport {
     private TaskService taskService = new TaskService();
     private List<Task> savedTasks;
     private String taskToDelete;
+    private String selectedDate; 
     
     @Override
     public String execute() {
         if (taskNames != null && !taskNames.isEmpty()) {
-            // Update service call to pass the list of Task objects
+            for (Task t : taskNames) {
+                if (t.getTaskDate() == null || t.getTaskDate().trim().isEmpty()) {
+                    t.setTaskDate(selectedDate);
+                }
+            }
+            
             boolean success = taskService.saveAlltasks(taskNames);
             return success ? SUCCESS : ERROR;
         }
@@ -65,6 +71,14 @@ public class SaveTaskAction extends ActionSupport {
 
     public void setSavedTasks(List<Task> savedTasks) {
         this.savedTasks = savedTasks;
+    }
+
+    public String getSelectedDate() {
+        return selectedDate;
+    }
+
+    public void setSelectedDate(String selectedDate) {
+        this.selectedDate = selectedDate;
     }
     
 }
