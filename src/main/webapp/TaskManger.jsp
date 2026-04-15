@@ -19,6 +19,10 @@
 <div class="container">
     <div class="todo-container">
         <h3 class="text-center mb-4">Daily Task Log</h3>
+        <div class="col-md-4">
+            <label for="taskDateFilter">Select Date:</label>
+            <input type="date" id="taskDateFilter" class="form-control" name="selectedDate">
+        </div>
         
         <div class="input-group mb-4">
             <input type="text" id="taskInput" class="form-control" placeholder="Enter a new task...">
